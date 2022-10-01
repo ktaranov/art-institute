@@ -15,10 +15,12 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '~/assets/css/globals.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/repository'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,8 +32,15 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios'
+  ],
+
+  axios: {
+    baseUrl: 'https://api.artic.edu/api/v1/artworks'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
 }
