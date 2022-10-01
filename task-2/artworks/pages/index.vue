@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <NavBar />
     <BaseSearch />
     <ArtworksList :items="items"/>
   </div>
@@ -8,11 +9,13 @@
 <script>
 import BaseSearch from '../components/BaseSearch'
 import ArtworksList from '../components/ArtworksList'
+import NavBar from '../components/NavBar'
 export default {
   name: 'IndexPage',
   components: {
     BaseSearch,
-    ArtworksList
+    ArtworksList,
+    NavBar
   },
   async asyncData(ctx) {
     return {

@@ -28,7 +28,7 @@
     font-size: 18px;
     line-height: 1;
     color: #FF473A;
-    ::placeholder {
+    &::placeholder {
       font-size: 18px;
       line-height: 1;
       color: #FF473A;

@@ -25,11 +25,12 @@ export default {
 </script>
 <style lang="scss">
 .artworks-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   &__item {
-    margin-bottom: 5px;
+    width: 45vw;
+    margin-bottom: 12px;
   }
 }
 
