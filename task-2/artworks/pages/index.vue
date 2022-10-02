@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <NavBar />
-    <BaseSearch />
+    <BaseSearch
+      :value="searchValue"
+      @onInput="startSearch"
+    />
     <ArtworksList :items="items"/>
   </div>
 </template>
@@ -24,7 +27,16 @@ export default {
   },
   data() {
     return {
-      items: []
+      searchValue: ''
+    }
+  },
+  methods: {
+    async startSearch(value) {
+      console.log(value, this.$getRepository)
+      this.searchValue = value
+      if (this.searchValue.length > 2) {
+          this.items = await this.$getRepository.search(value)
+      }
     }
   }
 }

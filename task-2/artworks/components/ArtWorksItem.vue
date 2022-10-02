@@ -4,7 +4,7 @@
     <div class="item-image">
       <img
         v-lazy-load
-        :src="`https://www.artic.edu/iiif/2/${item.image_id}/full/200,/0/default.jpg`"
+        :src="`${address}${item.image_id}/full/200,/0/default.jpg`"
         :alt="`${item.title} ${item.artist_title ? item.artist_title : ''}`"
       />
     </div>
@@ -16,12 +16,18 @@
 </template>
 
 <script>
+
 export default {
   name: "ArtWorksItem",
   props: {
     item: {
       type: Object,
       default: () => {}
+    }
+  },
+  computed: {
+    address() {
+      return this.$constants.API_PIC_BASE_URL
     }
   }
 }
