@@ -5,11 +5,13 @@
       :value="searchValue"
       @onInput="startSearch"
     />
-    <ArtworksList :items="items"/>
+    <ArtworksList :items="items.data"/>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 import BaseSearch from '../components/BaseSearch'
 import ArtworksList from '../components/ArtworksList'
 import NavBar from '../components/NavBar'
@@ -22,20 +24,28 @@ export default {
   },
   async asyncData(ctx) {
     return {
-      items: await ctx.app.$getRepository.index()
+      asyncItems: await ctx.app.$getRepository.index()
     }
   },
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
+    }
+  },
+  computed: {
+    ...mapGetters(['searchResult']),
+    items() {
+      return this.searchResult.data ? this.searchResult : this.asyncItems
     }
   },
   methods: {
-    async startSearch(value) {
-      console.log(value, this.$getRepository)
+    ...mapActions(['fetchSearchData']),
+    startSearch(value) {
       this.searchValue = value
       if (this.searchValue.length > 2) {
-          this.items = await this.$getRepository.search(value)
+        setTimeout(() => {
+          this.fetchSearchData(value)
+        },3000)
       }
     }
   }

@@ -1,10 +1,9 @@
 <template>
   <div class="item-wrapper">
-<!--    TODO: check if lazy-load works -->
     <div class="item-image">
       <img
         v-lazy-load
-        :src="`${address}${item.image_id}/full/200,/0/default.jpg`"
+        :src="address"
         :alt="`${item.title} ${item.artist_title ? item.artist_title : ''}`"
       />
     </div>
@@ -27,9 +26,10 @@ export default {
   },
   computed: {
     address() {
-      return this.$constants.API_PIC_BASE_URL
+      return `${this.$constants.API_PIC_BASE_URL}${this.item.image_id}/full/200,/0/default.jpg`
     }
   }
+
 }
 </script>
 
