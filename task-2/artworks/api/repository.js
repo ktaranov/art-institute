@@ -1,11 +1,10 @@
-export default $axios => (resource) => ({
+export default ($axios) => (resource) => ({
   index() {
-    return $axios.$get(`${resource}` )
+    return $axios.$get(`${resource}`)
   },
   search(params) {
-    return $axios.$get(`${resource}/search?q=${params}&limit=100`)
+    return $axios.$get(
+      `${resource}/search?q=${params.searchValue}&fields=id,title,image_id&limit=${params.size}&page=${params.page}`
+    )
   },
-  getPicImageId(params) {
-    return $axios.$get(`${resource}/${params}?fields=id,title,image_id`)
-  }
 })

@@ -1,35 +1,49 @@
 export const state = () => ({
-  searchResult: []
+  searchResult: [],
+  isLoading: false
 })
 
 export const mutations = {
-  SET_ITEMS (state, payload) {
+  SET_ITEMS(state, payload) {
     state.searchResult = payload
+  },
+  ADD_ITEMS(state, payload) {
+    state.searchResult = [...state.searchResult, ...payload]
+  },
+  SET_LOADING(state, payload) {
+    state.isLoading = payload
   }
 }
 export const getters = {
   searchResult(state) {
     return state.searchResult
-  }
+  },
 }
 export const actions = {
-  async fetchSearchData ({ commit, dispatch }, payload) {
+  async fetchSearchData({ commit, dispatch }, payload) {
     try {
       const res = await this.$getRepository.search(payload)
-      for await (const item of res.data) {
-        item.image_id = await dispatch('fetchItemImageId', item.id)
-      }
-      commit('SET_ITEMS', res)
+      commit('SET_ITEMS', res.data)
     } catch (error) {
-      console.log(error)
+      throw new Error(error)
     }
   },
-  async fetchItemImageId({ commit }, id) {
+  async fetchNewPage({ commit, dispatch, state }, payload) {
     try {
-      const resp = await this.$getRepository.getPicImageId(id);
-      return resp.data.image_id
+      if (!state.isLoading) {
+        commit('SET_LOADING', true)
+        const res = await this.$getRepository.search(payload)
+
+        const unique = res.data.filter((item) => {
+          return state.searchResult.every((elem) => elem.id !== item.id)
+        })
+        if (res.data.length === payload.size) {
+          commit('ADD_ITEMS', unique)
+          commit('SET_LOADING', false)
+        }
+      }
     } catch (error) {
-      console.log(error)
+      throw new Error(error)
     }
-  }
+  },
 }
