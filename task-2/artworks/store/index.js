@@ -1,6 +1,6 @@
 export const state = () => ({
-  searchResult: [],
-  isLoading: false
+  searchResult: [{ artist_title: '', image_id: '' }],
+  isLoading: false,
 })
 
 export const mutations = {
@@ -12,7 +12,7 @@ export const mutations = {
   },
   SET_LOADING(state, payload) {
     state.isLoading = payload
-  }
+  },
 }
 export const getters = {
   searchResult(state) {

@@ -17,14 +17,11 @@
 </template>
 
 <script>
-
 import ArtWorksItem from './ArtWorksItem'
-import InfiniteScroll from "@/node_modules/@aligilan/infinitescroll/components/lib/InfiniteScroll";
 export default {
   name: 'ArtworksList',
   components: {
     ArtWorksItem,
-    InfiniteScroll
   },
   props: {
     items: {
@@ -44,19 +41,19 @@ export default {
 }
 </script>
 <style lang="scss">
-  .artworks-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    &__item {
-      width: 45vw;
-      margin-bottom: 12px;
-      &--hidden {
-        display: none;
-      }
+.artworks-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &__item {
+    width: 45vw;
+    margin-bottom: 12px;
+    &--hidden {
+      display: none;
     }
   }
-  .sr-only {
-    color: white
-  }
+}
+.sr-only {
+  color: white;
+}
 </style>

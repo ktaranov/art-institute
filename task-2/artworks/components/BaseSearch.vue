@@ -8,7 +8,7 @@
     />
     <img
       class="search__icon"
-      :class="{ 'search__icon--hidden': !!value.length }"
+      :class="{ 'search__icon--hidden': !isIcon }"
       src="../static/search.svg"
       alt="Search for artworks"
     />
@@ -22,8 +22,21 @@ export default {
       default: '',
     },
   },
+  data() {
+    return {
+      isIcon: true,
+    }
+  },
+  watch: {
+    value(newValue) {
+      if (!newValue.length) {
+        this.isIcon = true
+      }
+    },
+  },
   methods: {
     startSearch(e) {
+      this.isIcon = false
       this.$emit('onInput', e.target.value)
     },
   },
