@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="artworks-list">
-      <li v-for="item in items" :key="item.id" class="artworks-list__item" >
-        <ArtWorksItem  :item="item" />
+      <li v-for="item in items" :key="item.id" class="artworks-list__item" :class="{'artworks-list__item--hidden': !item.image_id}" >
+        <ArtWorksItem :item="item" />
       </li>
     </ul>
   </div>
@@ -31,6 +31,9 @@ export default {
   &__item {
     width: 45vw;
     margin-bottom: 12px;
+    &--hidden {
+      display: none;
+    }
   }
 }
 

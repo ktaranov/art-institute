@@ -16,8 +16,9 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    position: relative;
     font-family: Montserrat, Arial, Helvetica, sans-serif;
+    background: white;
+    z-index: 1;
     &__title{
       font-weight: 400;
       font-size: 18px;

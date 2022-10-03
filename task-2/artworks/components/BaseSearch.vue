@@ -31,7 +31,7 @@ export default {
 
 </script>
 <style lang="scss">
- .search {
+  .search {
     position: relative;
     margin-bottom: 20px;
     &__icon {
@@ -46,11 +46,11 @@ export default {
     }
     input {
       border: 2px solid #FF473A;
-      width: 100%;
       padding: 14px 10px;
       font-size: 18px;
       line-height: 1;
       color: #FF473A;
+      width: 100%;
       &::placeholder {
         font-size: 18px;
         line-height: 1;
