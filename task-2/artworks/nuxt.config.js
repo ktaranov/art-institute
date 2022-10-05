@@ -30,7 +30,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', 'nuxt-lazy-load', '@aligilan/infinitescroll'],
+  modules: ['@nuxtjs/axios', 'nuxt-lazy-load', '@aligilan/infinitescroll'], //it probably needs bootstrap-vue/nuxt for infinitescroll to work
 
   axios: {
     baseUrl: 'https://api.artic.edu/api/v1/artworks',

@@ -1,5 +1,7 @@
 <template>
   <div class="search">
+<!--    there is a bug with typing, the first letter disappears, might be because of incorrect debouncing-->
+<!--    actually it is appears, but not at once -->
     <input
       type="search"
       placeholder="Search for artworks"

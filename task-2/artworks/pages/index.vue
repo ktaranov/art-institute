@@ -20,6 +20,9 @@ import { mapGetters, mapActions } from 'vuex'
 import BaseSearch from '../components/BaseSearch'
 import ArtworksList from '../components/ArtworksList'
 import NavBar from '../components/NavBar'
+
+// It is good to use SSR prefetch data to render some items on the first render.
+// It is fine it is not mentioned in the task.
 export default {
   name: 'IndexPage',
   components: {
@@ -66,6 +69,7 @@ export default {
       this.fetchNewPage(params)
     },
     debounceSearch(value) {
+      // debounce should not prevent value from being changed for the input itself, it should only affect searching request
       if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
       this.debounceTimeout = setTimeout(() => {
         this.startSearch(value)
