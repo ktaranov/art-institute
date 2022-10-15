@@ -36,6 +36,7 @@ export default {
     '@aligilan/infinitescroll',
     'bootstrap-vue/nuxt'
   ], //it probably needs bootstrap-vue/nuxt for infinitescroll to work
+  // Todo find another library for infinite scroll, because bootstrap vue  is too heavy kip it for such a purpose
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false
