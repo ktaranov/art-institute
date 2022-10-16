@@ -9,10 +9,11 @@
       >
         <ArtWorksItem :item="item" />
       </li>
-      <client-only>
-        <infinite-scroll @load-more="fetchNewPage()"></infinite-scroll>
-      </client-only>
+
     </ul>
+    <client-only>
+      <InfiniteScroll :enough="enough" @load-more="fetchNewPage()" />
+    </client-only>
   </div>
 </template>
 

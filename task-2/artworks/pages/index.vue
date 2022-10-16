@@ -42,13 +42,12 @@ export default {
   computed: {
     ...mapGetters(['searchResult']),
     items() {
-      return this.searchResult
+      return this.searchResult || []
     },
   },
   methods: {
     ...mapActions(['fetchSearchData', 'fetchNewPage']),
-    startSearch(value) {
-      this.searchValue = value
+    startSearch() {
       this.page = 1
       const params = {
         searchValue: this.searchValue,
@@ -70,9 +69,10 @@ export default {
     },
     debounceSearch(value) {
       // debounce should not prevent value from being changed for the input itself, it should only affect searching request
+      this.searchValue = value
       if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
       this.debounceTimeout = setTimeout(() => {
-        this.startSearch(value)
+        this.startSearch()
       }, 1000)
     },
   },
@@ -94,7 +94,6 @@ export default {
     overflow: hidden;
     position: absolute;
     top: 155px;
-    //width: 100%;
     margin: 15px;
   }
 }

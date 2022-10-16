@@ -33,14 +33,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'nuxt-lazy-load',
-    '@aligilan/infinitescroll',
-    'bootstrap-vue/nuxt'
-  ], //it probably needs bootstrap-vue/nuxt for infinitescroll to work
-  // Todo find another library for infinite scroll, because bootstrap vue  is too heavy kip it for such a purpose
-  bootstrapVue: {
-    bootstrapCSS: false,
-    bootstrapVueCSS: false
-  },
+    '@forked-prs/nuxt-infinite-scroll-module'
+  ],
   axios: {
     baseUrl: 'https://api.artic.edu/api/v1/artworks',
   },

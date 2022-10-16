@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
 export default {
   props: {
     value: {
@@ -33,10 +34,15 @@ export default {
     value(newValue) {
       if (!newValue.length) {
         this.isIcon = true
+        this.clearSearch()
       }
     },
   },
   methods: {
+    ...mapMutations(['SET_ITEMS']),
+    clearSearch() {
+      this.SET_ITEMS([])
+    },
     startSearch(e) {
       this.isIcon = false
       this.$emit('onInput', e.target.value)
