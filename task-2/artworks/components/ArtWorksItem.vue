@@ -1,16 +1,9 @@
 <template>
   <div class="item-wrapper">
     <div class="item-image">
-<!--     would be good to use a placeholder image here,
-it should be loaded as base64 preview image, it will improve UX for users with slow network.
-in api documentation you could find it https://api.artic.edu/api/v1/swagger.json
-
-"lqip": {
-"description": "Low-quality image placeholder (LQIP). Currently a 5x5-constrained, base64-encoded GIF."
-},s-->
       <img
-        v-lazy-load
-        :src="address"
+        :src="src ? src : lqip"
+        :data-src="address"
         :alt="`${item.title} ${item.artist_title ? item.artist_title : ''}`"
       />
     </div>
@@ -30,11 +23,32 @@ export default {
       default: () => {},
     },
   },
+  data() {
+    return {
+      src: null
+    }
+  },
   computed: {
     address() {
       return `${this.$constants.API_PIC_BASE_URL}${this.item.image_id}/full/200,/0/default.jpg`
     },
+    lqip() {
+      return this.item.thumbnail ? this.item.thumbnail.lqip : '';
+    }
   },
+  mounted () {
+    window.addEventListener("load", this.setDownloadedPic);
+    window.addEventListener("scroll", this.setDownloadedPic);
+  },
+  destroyed () {
+    window.removeEventListener('load', this.setDownloadedPic)
+    window.addEventListener("scroll", this.setDownloadedPic);
+  },
+  methods: {
+    setDownloadedPic() {
+      this.src = this.address
+    }
+  }
 }
 </script>
 

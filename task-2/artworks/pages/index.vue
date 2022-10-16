@@ -30,7 +30,7 @@ export default {
   },
   async asyncData({ $axios }) {
     const preloadedResult = await $axios.$get(
-      `https://api.artic.edu/api/v1/artworks/search?q=&fields=id,title,image_id&limit=12&page=1`
+      `https://api.artic.edu/api/v1/artworks/search?q=&fields=id,title,image_id,thumbnail&limit=12&page=1`
     )
 
     return { preloadedResult: preloadedResult.data }
