@@ -21,14 +21,19 @@ import BaseSearch from '../components/BaseSearch'
 import ArtworksList from '../components/ArtworksList'
 import NavBar from '../components/NavBar'
 
-// It is good to use SSR prefetch data to render some items on the first render.
-// It is fine it is not mentioned in the task.
 export default {
   name: 'IndexPage',
   components: {
     BaseSearch,
     ArtworksList,
     NavBar,
+  },
+  async asyncData({ $axios }) {
+    const preloadedResult = await $axios.$get(
+      `https://api.artic.edu/api/v1/artworks/search?q=&fields=id,title,image_id&limit=12&page=1`
+    )
+
+    return { preloadedResult: preloadedResult.data }
   },
   data() {
     return {
@@ -42,7 +47,7 @@ export default {
   computed: {
     ...mapGetters(['searchResult']),
     items() {
-      return this.searchResult || []
+      return  this.searchResult.length > 1 ? this.searchResult : this.preloadedResult
     },
   },
   methods: {
@@ -68,7 +73,6 @@ export default {
       this.fetchNewPage(params)
     },
     debounceSearch(value) {
-      // debounce should not prevent value from being changed for the input itself, it should only affect searching request
       this.searchValue = value
       if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
       this.debounceTimeout = setTimeout(() => {

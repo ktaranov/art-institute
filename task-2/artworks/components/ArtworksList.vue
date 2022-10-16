@@ -12,7 +12,7 @@
 
     </ul>
     <client-only>
-      <InfiniteScroll :enough="enough" @load-more="fetchNewPage()" />
+      <InfiniteScroll v-if="items.length > 1" :enough="enough" @load-more="fetchNewPage()" />
     </client-only>
   </div>
 </template>
