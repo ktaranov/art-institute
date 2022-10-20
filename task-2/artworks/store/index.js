@@ -33,12 +33,8 @@ export const actions = {
       if (!state.isLoading) {
         commit('SET_LOADING', true)
         const res = await this.$getRepository.search(payload)
-
-        const unique = res.data.filter((item) => {
-          return state.searchResult.every((elem) => elem.id !== item.id)
-        })
         if (res.data.length === payload.size) {
-          commit('ADD_ITEMS', unique)
+          commit('ADD_ITEMS', res)
           commit('SET_LOADING', false)
         }
       }

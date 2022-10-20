@@ -3,7 +3,7 @@
     <ul class="artworks-list">
       <li
         v-for="item in items"
-        :key="item.id"
+        :key="`${item.id}_${Math.random()}`"
         class="artworks-list__item"
         :class="{ 'artworks-list__item--hidden': !item.image_id }"
       >
